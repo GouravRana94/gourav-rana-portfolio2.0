@@ -1,90 +1,112 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { FileText, ExternalLink, Award, ShieldCheck, BookOpen } from "lucide-react";
+import { X } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 
+import cert1 from "@/assets/certs/cert-1.jpg";
+import cert2 from "@/assets/certs/cert-2.jpg";
+import cert3 from "@/assets/certs/cert-3.jpg";
+import cert4 from "@/assets/certs/cert-4.jpg";
+import cert5 from "@/assets/certs/cert-5.jpg";
+import cert6 from "@/assets/certs/cert-6.jpg";
+import cert7 from "@/assets/certs/cert-7.jpg";
+import cert8 from "@/assets/certs/cert-8.jpg";
+import cert9 from "@/assets/certs/cert-9.jpg";
+import cert10 from "@/assets/certs/cert-10.jpg";
+import cert11 from "@/assets/certs/cert-11.jpg";
+import cert12 from "@/assets/certs/cert-12.jpg";
+import cert13 from "@/assets/certs/cert-13.jpg";
+
 const certs = [
-  { title: "ICECMSN 2025 — IEEE Conference", issuer: "Hindusthan Institute of Technology", date: "Nov 2025", note: "Paper: Explainable Hybrid ML Models for Predicting Renal Stone Re-occurrence & CKD", icon: Award, highlight: true },
-  { title: "AI Fundamentals: Language and Vision", issuer: "IBM SkillsBuild", date: "Mar 2026", link: "https://www.credly.com/go/o6Y60ed2", icon: ShieldCheck },
-  { title: "Mastering DevOps", issuer: "Infosys Springboard", date: "Mar 2026", icon: BookOpen },
-  { title: "Master Generative AI & Tools", issuer: "Infosys Springboard", date: "Mar 2026", icon: BookOpen },
-  { title: "Google Analytics Certification", issuer: "Google", date: "Mar 2026", icon: ShieldCheck },
-  { title: "Machine Learning with Python", issuer: "freeCodeCamp", date: "Mar 2026", note: "~300 hours of coursework", icon: Award },
-  { title: "MERN Stack Development", issuer: "Excellence Technology", date: "Jan–May 2025", icon: FileText },
+  { title: "ICECMSN 2025 — IEEE Conference", issuer: "Hindusthan Institute of Technology", image: cert1 },
+  { title: "AI Fundamentals: Language & Vision", issuer: "IBM SkillsBuild", image: cert2 },
+  { title: "Mastering DevOps", issuer: "Infosys Springboard", image: cert3 },
+  { title: "Master Generative AI & Tools", issuer: "Infosys Springboard", image: cert4 },
+  { title: "Google Analytics Certification", issuer: "Google", image: cert5 },
+  { title: "Machine Learning with Python", issuer: "freeCodeCamp", image: cert6 },
+  { title: "MERN Stack Development", issuer: "Excellence Technology", image: cert7 },
+  { title: "Azure Cloud Computing", issuer: "Microsoft / LinkedIn Learning", image: cert8 },
+  { title: "Node.js", issuer: "Infosys Springboard", image: cert9 },
+  { title: "Personality Development", issuer: "Excellence Technology", image: cert10 },
+  { title: "Python for Data Science", issuer: "Infosys Springboard", image: cert11 },
+  { title: "SkillUp 101 — Python", issuer: "EDUCBA", image: cert12 },
+  { title: "Soft Skills Training", issuer: "Infosys Springboard", image: cert13 },
 ];
 
-const CertificatesSection = () => (
-  <section id="certificates" className="py-24 grid-bg">
-    <div className="container">
-      <SectionTitle label="// Classified Documents" title="CERTIFICATES" />
+const CertificatesSection = () => {
+  const [selected, setSelected] = useState<number | null>(null);
 
-      {/* Featured cert */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-        className="glass-card p-6 mb-6 tactical-border relative overflow-hidden"
-      >
-        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl" />
-        <div className="flex items-start gap-4 relative">
-          <div className="p-3 bg-primary/15 border border-primary/30 text-primary flex-shrink-0">
-            <Award size={24} />
-          </div>
-          <div>
-            <div className="flex items-center gap-3 mb-1">
-              <span className="font-display text-[9px] tracking-widest text-primary bg-primary/10 px-2 py-0.5 border border-primary/20">
-                TOP SECRET — FEATURED
-              </span>
-              <span className="font-display text-[9px] text-muted-foreground">{certs[0].date}</span>
-            </div>
-            <h3 className="font-display text-sm font-bold text-foreground mt-2">{certs[0].title}</h3>
-            <p className="font-body text-sm text-muted-foreground mt-1">{certs[0].issuer}</p>
-            {certs[0].note && (
-              <p className="font-body text-xs text-muted-foreground mt-2 italic border-l-2 border-primary/30 pl-3">{certs[0].note}</p>
-            )}
-          </div>
-        </div>
-      </motion.div>
+  return (
+    <section id="certificates" className="py-24 grid-bg">
+      <div className="container">
+        <SectionTitle label="// Classified Documents" title="CERTIFICATES" />
 
-      {/* Rest of certs */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {certs.slice(1).map((c, i) => {
-          const Icon = c.icon;
-          return (
-            <motion.div
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {certs.map((c, i) => (
+            <motion.button
               key={i}
-              initial={{ opacity: 0, y: 20, rotate: 1 }}
-              whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.04 }}
               viewport={{ once: true }}
-              className="glass-card p-5 group hover:border-primary/30 transition-all relative overflow-hidden"
+              onClick={() => setSelected(i)}
+              className="glass-card group hover:border-primary/40 transition-all text-left overflow-hidden cursor-none"
             >
-              <div className="absolute -top-8 -right-8 w-16 h-16 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-all" />
-              <div className="flex items-start gap-3 relative">
-                <div className="p-2 bg-primary/10 border border-primary/20 text-primary flex-shrink-0">
-                  <Icon size={16} />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-display text-[8px] tracking-widest text-primary/70">CLASSIFIED</span>
-                    <span className="font-display text-[8px] text-muted-foreground">{c.date}</span>
-                  </div>
-                  <h3 className="font-display text-[11px] font-bold text-foreground leading-snug">{c.title}</h3>
-                  <p className="font-body text-[11px] text-muted-foreground mt-1">{c.issuer}</p>
-                  {c.note && <p className="font-body text-[10px] text-muted-foreground mt-2 italic">{c.note}</p>}
-                  {c.link && (
-                    <a href={c.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-accent text-[10px] mt-2 hover:underline cursor-none font-display tracking-wider">
-                      VERIFY <ExternalLink size={10} />
-                    </a>
-                  )}
-                </div>
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img
+                  src={c.image}
+                  alt={c.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
+                <span className="absolute top-2 left-2 font-display text-[7px] tracking-widest text-primary bg-primary/10 border border-primary/20 px-1.5 py-0.5">
+                  CLASSIFIED
+                </span>
               </div>
-            </motion.div>
-          );
-        })}
+              <div className="p-3">
+                <h3 className="font-display text-[10px] sm:text-xs font-bold text-foreground leading-snug line-clamp-2">
+                  {c.title}
+                </h3>
+                <p className="font-body text-[10px] text-muted-foreground mt-1 truncate">{c.issuer}</p>
+              </div>
+            </motion.button>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+
+      {/* Lightbox */}
+      {selected !== null && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 cursor-none"
+          onClick={() => setSelected(null)}
+        >
+          <button
+            onClick={() => setSelected(null)}
+            className="absolute top-6 right-6 text-foreground/70 hover:text-foreground transition-colors cursor-none"
+          >
+            <X size={28} />
+          </button>
+          <motion.img
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            src={certs[selected].image}
+            alt={certs[selected].title}
+            className="max-h-[85vh] max-w-[90vw] object-contain border border-primary/20 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
+            <p className="font-display text-sm text-foreground">{certs[selected].title}</p>
+            <p className="font-body text-xs text-muted-foreground mt-1">{certs[selected].issuer}</p>
+          </div>
+        </motion.div>
+      )}
+    </section>
+  );
+};
 
 export default CertificatesSection;
