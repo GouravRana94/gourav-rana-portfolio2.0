@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 
 const projects = [
@@ -34,34 +34,43 @@ const ProjectsSection = () => (
         {projects.map((p, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 30, rotate: 2 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
             viewport={{ once: true }}
-            className="glass-card p-6 group hover:border-primary/30 transition-all duration-300"
+            className="glass-card group hover:border-primary/25 transition-all duration-300 flex flex-col"
           >
-            <div className="flex items-center justify-between mb-4">
-              <span className="font-display text-[9px] tracking-widest text-accent bg-accent/10 px-2 py-0.5">
-                OPERATION STATUS: COMPLETE
+            {/* Header strip */}
+            <div className="flex items-center justify-between px-6 pt-5 pb-0">
+              <span className="font-display text-[8px] tracking-[0.15em] text-accent bg-accent/10 px-2 py-0.5 border border-accent/15">
+                STATUS: COMPLETE
               </span>
               <span className="font-display text-[9px] text-muted-foreground">{p.period}</span>
             </div>
-            <h3 className="font-display text-sm font-bold text-foreground mb-2">{p.name}</h3>
-            <p className="font-body text-sm text-muted-foreground mb-4 leading-relaxed">{p.desc}</p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {p.tech.map((t) => (
-                <span key={t} className="font-display text-[9px] tracking-wider px-2 py-0.5 bg-secondary text-muted-foreground">
-                  {t}
-                </span>
-              ))}
-            </div>
-            <div className="flex gap-4">
-              <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors cursor-none">
-                <Github size={16} />
-              </a>
-              <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-accent transition-colors cursor-none">
-                <ExternalLink size={16} />
-              </a>
+
+            <div className="p-6 pt-4 flex flex-col flex-1">
+              <h3 className="font-display text-sm font-bold text-foreground mb-2 group-hover:text-primary transition-colors flex items-center gap-1.5">
+                {p.name}
+                <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
+              </h3>
+              <p className="font-body text-sm text-muted-foreground mb-5 leading-relaxed flex-1">{p.desc}</p>
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {p.tech.map((t) => (
+                  <span key={t} className="font-display text-[8px] tracking-[0.1em] px-2 py-1 bg-secondary/80 text-muted-foreground border border-border/50">
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <div className="flex gap-4 pt-3 border-t border-border/50">
+                <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors cursor-none font-display text-[9px] tracking-wider">
+                  <Github size={14} />
+                  CODE
+                </a>
+                <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-muted-foreground hover:text-accent transition-colors cursor-none font-display text-[9px] tracking-wider">
+                  <ExternalLink size={14} />
+                  DEMO
+                </a>
+              </div>
             </div>
           </motion.div>
         ))}
